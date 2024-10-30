@@ -14,6 +14,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 //Testar
+    //Testar igen
 
     public static void main(String[] args) {
         new gameLinnKarina();
