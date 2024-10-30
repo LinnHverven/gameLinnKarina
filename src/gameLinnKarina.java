@@ -13,7 +13,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-
+//Testar
 
     public static void main(String[] args) {
         new gameLinnKarina();
