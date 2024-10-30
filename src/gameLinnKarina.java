@@ -15,6 +15,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
     }
 //Testar
     //Testar igen
+    //Karinatestar
 
     public static void main(String[] args) {
         new gameLinnKarina();
