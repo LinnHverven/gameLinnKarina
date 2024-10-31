@@ -61,15 +61,40 @@ public class gameLinnKarina extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == newGameButton) { //reset the game
+    public void actionPerformed(ActionEvent e) { //reset the game
+        if (e.getSource() == newGameButton) {
             panel.removeAll();
             createButtons();
             panel.revalidate();
             panel.repaint();
+        } else {
+            for (int i = 0; i < 4; i++) { //Check if a gameButton is pressed
+                for (int j = 0; j < 4; j++) {
+                    if (e.getSource() == gameNumbersButton[i][j]) {
+                        if (isNextTo(i, j, emptyRows, emptyCols)) { //Check if the pressed gamebutton is next to ther empty "spot".
+                            swapButtonPlace(i, j, emptyRows, emptyCols);
+                            emptyRows = i;
+                            emptyCols = j;
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+public boolean isNextTo(int row1, int col1, int row2, int col2) {
+    return (Math.abs(row1 - row2) == 1 && col1 == col2) ||
+            (Math.abs(col1 - col2) == 1 && row1 == row2);
+}
+
+public void swapButtonPlace(int row1, int col1, int row2, int col2){//Change place with two gamebuttons
+        String temp = gameNumbersButton[row1][col1].getText();
+       gameNumbersButton[row1][col1].setText(gameNumbersButton[row2][col2].getText());
+       gameNumbersButton[row2][col2].setText(temp);
         }
 
-    }
 
     public static void main(String[] args) {
         new gameLinnKarina();
