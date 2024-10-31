@@ -3,7 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class gameLinnKarina extends JFrame implements ActionListener {
 
@@ -11,6 +13,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
     JButton[][] gameNumbersButton = new JButton[4][4];
     JButton newGameButton; // Button to start i new game
     int emptyRows, emptyCols; //empty button
+
 
     public gameLinnKarina() {
 
@@ -26,8 +29,6 @@ public class gameLinnKarina extends JFrame implements ActionListener {
         add(newGameButton, BorderLayout.SOUTH);
 
 
-
-
         setTitle("Game");
         pack();
         setLocationRelativeTo(null);
@@ -40,7 +41,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
         for (int i = 1; i < 4 * 4; i++) {
             gameNumbers.add(String.valueOf(i)); // Adding number 1-15
         }
-        gameNumbers.add(""); // Adding the empty "number"
+        gameNumbers.add("0"); // Adding the empty "number"
         Collections.shuffle(gameNumbers); // Mix the numbers
 
 
@@ -51,13 +52,32 @@ public class gameLinnKarina extends JFrame implements ActionListener {
                 gameNumbersButton[i][j].addActionListener(this);
                 panel.add(gameNumbersButton[i][j]);
 
-                if (gameNumbers.get(k).equals("")) { //regeln för hur den ska flyttas
+                if (gameNumbers.get(k).equals("0")) { //regeln för hur den ska flyttas
                     emptyRows = i;
                     emptyCols = j;
+                    gameNumbersButton[i][j].setText("");
+                    gameNumbersButton[i][j].setOpaque(false);
+
                 }
                 k++;
             }
         }
+
+    }
+
+    public boolean createWin(){
+        List<String>  win1 = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","0");
+        List<String>  win2 = Arrays.asList("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15");
+
+        List<String> currentGame = new ArrayList<>();
+        for(int i = 0; i<4; i++){
+            for (int j = 0; j < 4; j++){
+                String value = gameNumbersButton[i][j].getText();
+                currentGame.add(value.isEmpty() ? "0" : value);
+            }
+        }
+        return currentGame.equals(win1) || currentGame.equals(win2);
+
     }
 
     @Override
@@ -67,11 +87,33 @@ public class gameLinnKarina extends JFrame implements ActionListener {
             createButtons();
             panel.revalidate();
             panel.repaint();
-        }
+        } else {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (e.getSource() == gameNumbersButton[i][j]){
+                        if((Math.abs(emptyRows - i) == 1 && emptyCols == j || (Math.abs(emptyCols - j) == 1 && emptyRows == i))) {
+                            gameNumbersButton[emptyRows][emptyCols].setText(gameNumbersButton[i][j].getText());
+                            gameNumbersButton[i][j].setText("");
 
+                            emptyRows = i;
+                            emptyCols = j;
+
+                            if(createWin()){
+                                JOptionPane.showMessageDialog(null, "You win!");
+                        }
+                            return;
+                    }
+                }
+            }
+
+
+        }
+    }
     }
 
     public static void main(String[] args) {
         new gameLinnKarina();
     }
 }
+
+
