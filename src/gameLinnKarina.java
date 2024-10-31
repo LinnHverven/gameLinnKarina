@@ -16,19 +16,23 @@ public class gameLinnKarina extends JFrame implements ActionListener {
 
         panel = new JPanel();
         panel.setLayout(new GridLayout(4, 4));
+
+        newGameButton = new JButton("New Game");
+        newGameButton.addActionListener(this);
+
         createButtons();
 
         add(panel, BorderLayout.CENTER);
         add(newGameButton, BorderLayout.SOUTH);
 
-        newGameButton = new JButton("New Game");
-        newGameButton.addActionListener(this);
 
-        setVisible(true);
+
+
         setTitle("Game");
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     public void createButtons() { // Creates buttons in random order.
@@ -47,7 +51,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
                 gameNumbersButton[i][j].addActionListener(this);
                 panel.add(gameNumbersButton[i][j]);
 
-                if (gameNumbers.get(k).equals("")) {
+                if (gameNumbers.get(k).equals("")) { //regeln för hur den ska flyttas
                     emptyRows = i;
                     emptyCols = j;
                 }
@@ -58,7 +62,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == newGameButton) {
+        if (e.getSource() == newGameButton) { //reset the game
             panel.removeAll();
             createButtons();
             panel.revalidate();
