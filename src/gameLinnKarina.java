@@ -1,20 +1,75 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class gameLinnKarina extends JFrame implements ActionListener {
-    JButton button = new JButton();
-    JPanel panel = new JPanel();
 
-    //Kommentera ut ett spel som vinner för att visa att det går. Kör programmet två gånger.
+    JPanel panel;
+    JButton[][] gameNumbersButton = new JButton[4][4];
+    JButton newGameButton; // Button to start i new game
+    int emptyRows, emptyCols; //empty button
+
     public gameLinnKarina() {
-        setVisible(true);
+
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4));
+
+        newGameButton = new JButton("New Game");
+        newGameButton.addActionListener(this);
+
+        createButtons();
+
+        add(panel, BorderLayout.CENTER);
+        add(newGameButton, BorderLayout.SOUTH);
+
+
+
+
         setTitle("Game");
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
     }
-//Testar
-    //Testar igen
+
+    public void createButtons() { // Creates buttons in random order.
+        ArrayList<String> gameNumbers = new ArrayList<>();
+        for (int i = 1; i < 4 * 4; i++) {
+            gameNumbers.add(String.valueOf(i)); // Adding number 1-15
+        }
+        gameNumbers.add(""); // Adding the empty "number"
+        Collections.shuffle(gameNumbers); // Mix the numbers
+
+
+        int k = 0;  // Creating a button for each number
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                gameNumbersButton[i][j] = new JButton(gameNumbers.get(k));
+                gameNumbersButton[i][j].addActionListener(this);
+                panel.add(gameNumbersButton[i][j]);
+
+                if (gameNumbers.get(k).equals("")) { //regeln för hur den ska flyttas
+                    emptyRows = i;
+                    emptyCols = j;
+                }
+                k++;
+            }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == newGameButton) { //reset the game
+            panel.removeAll();
+            createButtons();
+            panel.revalidate();
+            panel.repaint();
+        }
+
+    }
 
     public static void main(String[] args) {
         new gameLinnKarina();
