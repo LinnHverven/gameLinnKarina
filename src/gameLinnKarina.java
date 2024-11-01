@@ -32,7 +32,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
             gameGrid.panel.removeAll();
             gameGrid.createButtons(this);
             gameGrid.panel.revalidate();
-           gameGrid.panel.repaint();
+            gameGrid.panel.repaint();
         } else {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) { //for-loop checks the grid
