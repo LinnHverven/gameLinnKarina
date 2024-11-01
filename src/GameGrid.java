@@ -42,13 +42,10 @@ public class GameGrid {
                         gameNumbersButton[i][j].setText("");
                         gameNumbersButton[i][j].setOpaque(false);
 
-
                     }
                     k++;
                 }
             }
-
-
         }
 
 
@@ -65,13 +62,9 @@ public class GameGrid {
             }
         }
         return currentGame.equals(win1) || currentGame.equals(win2);
-
-
     }
 
     public JPanel getPanel(){
         return panel;
     }
-
 }
-
