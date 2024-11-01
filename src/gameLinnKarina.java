@@ -14,7 +14,6 @@ public class gameLinnKarina extends JFrame implements ActionListener {
     JButton newGameButton; // Button to start i new game
     int emptyRows, emptyCols; //empty button
 
-
     public gameLinnKarina() {
 
         panel = new JPanel();
@@ -27,6 +26,8 @@ public class gameLinnKarina extends JFrame implements ActionListener {
 
         add(panel, BorderLayout.CENTER);
         add(newGameButton, BorderLayout.SOUTH);
+
+
 
 
         setTitle("Game");
@@ -106,14 +107,9 @@ public class gameLinnKarina extends JFrame implements ActionListener {
                 }
             }
 
-
-        }
-    }
     }
 
     public static void main(String[] args) {
         new gameLinnKarina();
     }
 }
-
-
