@@ -47,10 +47,10 @@ public class gameLinnKarina extends JFrame implements ActionListener {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 gameNumbersButton[i][j] = new JButton(gameNumbers.get(k));
-                gameNumbersButton[i][j].setFont(new Font("Calibri", Font.BOLD, 15));
+                gameNumbersButton[i][j].setFont(new Font("Calibri", Font.BOLD, 25));
 
-                gameNumbersButton[i][j].setBackground(Color.WHITE);
-                gameNumbersButton[i][j].setForeground(Color.BLACK);
+                //gameNumbersButton[i][j].setBackground(Color.WHITE);
+                //gameNumbersButton[i][j].setForeground(Color.BLACK);
 
                 gameNumbersButton[i][j].addActionListener(this);
                 panel.add(gameNumbersButton[i][j]);
