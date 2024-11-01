@@ -20,6 +20,8 @@ public class gameLinnKarina extends JFrame implements ActionListener {
         panel.setLayout(new GridLayout(4, 4));
 
         newGameButton = new JButton("New Game");
+        newGameButton.setPreferredSize(new Dimension(80, 50));
+        newGameButton.setFont(new Font("Calibri", Font.BOLD, 25));
         newGameButton.addActionListener(this);
 
         createButtons();
@@ -49,8 +51,8 @@ public class gameLinnKarina extends JFrame implements ActionListener {
                 gameNumbersButton[i][j] = new JButton(gameNumbers.get(k));
                 gameNumbersButton[i][j].setFont(new Font("Calibri", Font.BOLD, 25));
 
-                //gameNumbersButton[i][j].setBackground(Color.WHITE);
-                //gameNumbersButton[i][j].setForeground(Color.BLACK);
+                gameNumbersButton[i][j].setBackground(Color.WHITE);
+                gameNumbersButton[i][j].setForeground(Color.BLUE);
 
                 gameNumbersButton[i][j].addActionListener(this);
                 panel.add(gameNumbersButton[i][j]);
@@ -59,7 +61,7 @@ public class gameLinnKarina extends JFrame implements ActionListener {
                     emptyRows = i;
                     emptyCols = j;
                     gameNumbersButton[i][j].setText("");
-                    gameNumbersButton[i][j].setOpaque(false);
+                    gameNumbersButton[i][j].setBackground(Color.WHITE);
                 }
                 k++;
             }
