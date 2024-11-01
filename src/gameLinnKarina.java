@@ -1,32 +1,35 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+
 
 public class gameLinnKarina extends JFrame implements ActionListener {
-
-    JPanel panel;
-    JButton[][] gameNumbersButton = new JButton[4][4];
-    JButton newGameButton; // Button to start i new game
-    int emptyRows, emptyCols; //empty button
+    GameGrid gameGrid;
+    JButton newGameButton;
 
     public gameLinnKarina() {
+    gameGrid = new GameGrid(this);
 
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 4));
+    newGameButton = new JButton("New game");
+    newGameButton.addActionListener(this);
+
+    add(gameGrid.getPanel(), BorderLayout.CENTER);
+    add(newGameButton, BorderLayout.SOUTH);
+
+
+
+
+
+
 
         newGameButton = new JButton("New Game");
         newGameButton.addActionListener(this);
-
-        createButtons();
-
-        add(panel, BorderLayout.CENTER);
-        add(newGameButton, BorderLayout.SOUTH);
-
-
-
 
         setTitle("Game");
         pack();
@@ -35,43 +38,46 @@ public class gameLinnKarina extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public void createButtons() { // Creates buttons in random order.
-        ArrayList<String> gameNumbers = new ArrayList<>();
-        for (int i = 1; i < 4 * 4; i++) {
-            gameNumbers.add(String.valueOf(i)); // Adding number 1-15
-        }
-        gameNumbers.add(""); // Adding the empty "number"
-        Collections.shuffle(gameNumbers); // Mix the numbers
-
-
-        int k = 0;  // Creating a button for each number
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                gameNumbersButton[i][j] = new JButton(gameNumbers.get(k));
-                gameNumbersButton[i][j].addActionListener(this);
-                panel.add(gameNumbersButton[i][j]);
-
-                if (gameNumbers.get(k).equals("")) { //regeln för hur den ska flyttas
-                    emptyRows = i;
-                    emptyCols = j;
-                }
-                k++;
-            }
-        }
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newGameButton) { //reset the game
-            panel.removeAll();
-            createButtons();
-            panel.revalidate();
-            panel.repaint();
-        }
+            gameGrid.panel.removeAll();
+            gameGrid.createButtons(this);
+            gameGrid.panel.revalidate();
+           gameGrid.panel.repaint();
+        } else {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (e.getSource() == gameGrid.gameNumbersButton[i][j]){
+                        if((Math.abs(gameGrid.emptyRows - i) == 1 && gameGrid.emptyCols == j || (Math.abs(gameGrid.emptyCols - j) == 1 && gameGrid.emptyRows == i))) {
+                            gameGrid.gameNumbersButton[gameGrid.emptyRows][gameGrid.emptyCols].setText(gameGrid.gameNumbersButton[i][j].getText());
+                            gameGrid.gameNumbersButton[i][j].setText("");
 
+
+                            gameGrid.emptyRows = i;
+                            gameGrid.emptyCols = j;
+
+
+                            if(gameGrid.createWin()){
+                                JOptionPane.showMessageDialog(null, "You win! Congratulations!");
+                            }
+                            return;
+                        }
+                    }
+                }
+
+
+
+
+            }
+        }
     }
+
 
     public static void main(String[] args) {
         new gameLinnKarina();
     }
 }
+
+
