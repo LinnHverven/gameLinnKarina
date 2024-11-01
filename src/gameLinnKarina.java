@@ -1,12 +1,7 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 
 public class gameLinnKarina extends JFrame implements ActionListener {
@@ -14,26 +9,22 @@ public class gameLinnKarina extends JFrame implements ActionListener {
     JButton newGameButton;
 
     public gameLinnKarina() {
-    gameGrid = new GameGrid(this); //initializes gameGrid, this is listening for button
+        gameGrid = new GameGrid(this); //initializes gameGrid, this is listening for button
 
-    newGameButton = new JButton("New game"); //button for resetting the game
-    newGameButton.addActionListener(this);
-
-    add(gameGrid.getPanel(), BorderLayout.CENTER); //the grid of buttons in the center
-    add(newGameButton, BorderLayout.SOUTH); //"new game" button below the numbers.
-
-
-
-        newGameButton = new JButton("New Game"); //the button for shuffeling.
+        newGameButton = new JButton("New game"); //button for resetting the game
+        newGameButton.setPreferredSize(new Dimension(80, 50));
+        newGameButton.setFont(new Font("Calibri", Font.BOLD, 25));
         newGameButton.addActionListener(this);
 
+        add(gameGrid.getPanel(), BorderLayout.CENTER); //the grid of buttons in the center
+        add(newGameButton, BorderLayout.SOUTH); //"new game" button below the numbers.
+
         setTitle("Game");
-        pack();
+        setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) { //method being called when a button is being clicked
@@ -62,18 +53,11 @@ public class gameLinnKarina extends JFrame implements ActionListener {
                         }
                     }
                 }
-
-
-
-
             }
         }
     }
-
 
     public static void main(String[] args) {
         new gameLinnKarina();
     }
 }
-
-
