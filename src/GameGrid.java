@@ -54,7 +54,7 @@ public class GameGrid {
        List<String> win2 = Arrays.asList("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15");
 
 
-        List<String> currentGame = new ArrayList<>(); //collects buttons and thir numbers into the list currentGame
+        List<String> currentGame = new ArrayList<>(); //collects buttons and their numbers into the list currentGame
         for(int i = 0; i<4; i++){
             for (int j = 0; j < 4; j++){
                 String value = gameNumbersButton[i][j].getText();
